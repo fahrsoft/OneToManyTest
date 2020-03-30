@@ -80,3 +80,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+class PreviewManagedObjectContext {
+    static let shared = try! PreviewManagedObjectContext()
+    let viewContext: NSManagedObjectContext
+    
+    init() throws {
+        viewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    }
+    
+    var sampleOneFetchRequest: NSFetchRequest<One> {
+        let request: NSFetchRequest<One> = One.fetchRequest()
+        request.fetchLimit = 3
+        return request
+    }
+    
+    var sampleOnes: [One] {
+        let ones = try? viewContext.fetch(sampleOneFetchRequest)
+        return ones!
+    }
+    
+    var sampleOne: One {
+        return sampleOnes.first!
+    }
+}

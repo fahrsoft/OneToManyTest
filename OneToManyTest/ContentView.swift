@@ -13,42 +13,60 @@ struct ContentView: View {
     @FetchRequest(entity: One.entity(), sortDescriptors: []) var ones: FetchedResults<One>
     
     @State private var newName = ""
+    @State var isNavTitleHidden = true
     
     var body: some View {
         NavigationView {
-            List {
-                Section(header: Text("Add One")) {
-                    HStack {
-                        TextField("New One", text: self.$newName)
-                        Spacer()
-                        Button(action: {
-                            let newOne = One(context: self.moc)
-                            newOne.name = self.newName
-                            self.newName = ""
-                            try? self.moc.save()
-                        }) {
-                            Image(systemName: "plus.circle.fill")
-                                .foregroundColor(.green)
-                                .frame(width: 32, height: 32, alignment: .center)
-                        }
+            VStack {
+                HStack {
+                    TextField("New One", text: self.$newName)
+                    Spacer()
+                    Button(action: {
+                        let newOne = One(context: self.moc)
+                        newOne.name = self.newName
+                        self.newName = ""
+                        try? self.moc.save()
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.green)
+                            .frame(width: 32, height: 32, alignment: .center)
                     }
                 }
+                .padding(.top)
+                .padding(.horizontal)
 
-                Section(header: Text("Ones")) {
-                    ForEach(self.ones, id:\.self) { (one:One) in
-                        NavigationLink(destination: OneDetailView(one: one).environment(\.managedObjectContext, self.moc)) {
-                            OneView(one: one).environment(\.managedObjectContext, self.moc)
+                List {
+                    Section(header: Text("Ones")) {
+                        ForEach(self.ones, id:\.self) { (one:One) in
+                            NavigationLink(destination: OneDetailView(one: one, isNavTitleHidden: self.$isNavTitleHidden).environment(\.managedObjectContext, self.moc)) {
+                                OneView(one: one).environment(\.managedObjectContext, self.moc)
+                            }
+                        }
+                            
+                        .onDelete { indexSet in
+                            let deleteOne = self.ones[indexSet.first!]
+                            self.moc.delete(deleteOne)
+                            do {
+                                try self.moc.save()
+                            } catch {
+                                print(error)
+                            }
                         }
                     }
                 }
             }
             .navigationBarTitle(Text("Ones List"))
+            .navigationBarHidden(self.isNavTitleHidden)
+            .onAppear {
+                self.isNavTitleHidden = true
+            }
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let context = PreviewManagedObjectContext.shared.viewContext
+        return ContentView().environment(\.managedObjectContext, context)
     }
 }

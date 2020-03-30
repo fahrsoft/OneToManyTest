@@ -72,10 +72,7 @@
 		D7565178242D4FBF00D893F0 /* OneToManyTest */ = {
 			isa = PBXGroup;
 			children = (
-				D7565190242D511500D893F0 /* One+CoreDataClass.swift */,
-				D7565191242D511500D893F0 /* One+CoreDataProperties.swift */,
-				D7565192242D511500D893F0 /* Many+CoreDataClass.swift */,
-				D7565193242D511500D893F0 /* Many+CoreDataProperties.swift */,
+				D79EAD3524327375002FDC81 /* Data Model */,
 				D7565179242D4FBF00D893F0 /* AppDelegate.swift */,
 				D756517B242D4FBF00D893F0 /* SceneDelegate.swift */,
 				D7565180242D4FBF00D893F0 /* ContentView.swift */,
@@ -85,7 +82,6 @@
 				D7565182242D4FC300D893F0 /* Assets.xcassets */,
 				D7565187242D4FC300D893F0 /* LaunchScreen.storyboard */,
 				D756518A242D4FC300D893F0 /* Info.plist */,
-				D756517D242D4FBF00D893F0 /* OneToManyTest.xcdatamodeld */,
 				D7565184242D4FC300D893F0 /* Preview Content */,
 			);
 			path = OneToManyTest;
@@ -97,6 +93,18 @@
 				D7565185242D4FC300D893F0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D79EAD3524327375002FDC81 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				D756517D242D4FBF00D893F0 /* OneToManyTest.xcdatamodeld */,
+				D7565190242D511500D893F0 /* One+CoreDataClass.swift */,
+				D7565191242D511500D893F0 /* One+CoreDataProperties.swift */,
+				D7565192242D511500D893F0 /* Many+CoreDataClass.swift */,
+				D7565193242D511500D893F0 /* Many+CoreDataProperties.swift */,
+			);
+			path = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
