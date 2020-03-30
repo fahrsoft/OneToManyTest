@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="true" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Many" representedClassName="Many" syncable="YES">
+        <attribute name="attribute" optional="YES" attributeType="String"/>
+        <relationship name="one" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="One" inverseName="many" inverseEntity="One"/>
+    </entity>
+    <entity name="One" representedClassName="One" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="many" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Many" inverseName="one" inverseEntity="Many"/>
+    </entity>
+    <elements>
+        <element name="One" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Many" positionX="-54" positionY="0" width="128" height="73"/>
+    </elements>
 </model>
