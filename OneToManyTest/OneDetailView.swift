@@ -52,9 +52,6 @@ struct OneDetailView: View {
 
             List {
                 Section(header: Text("Manys")) {
-//                    ForEach(self.one.manyArray, id: \.self) { many in
-//                        ManyView(many: many).environment(\.managedObjectContext, self.moc)
-//                    }
                     ForEach(self.manys, id: \.self) { many in
                         ManyView(many: many).environment(\.managedObjectContext, self.moc)
                     }
